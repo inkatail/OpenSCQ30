@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=OpenSCQ30 (Qt)
+Comment=Control settings for Soundcore headphones and earbuds (Qt UI)
+Exec=openscq30-gui-qt
+Icon=com.oppzippy.OpenSCQ30
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Qt;
+StartupWMClass=openscq30-gui-qt

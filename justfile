@@ -1,6 +1,7 @@
 mod android
 mod cli
 mod gui
+mod gui-qt
 mod i18n
 mod i18n-macros
 mod lib
@@ -19,6 +20,12 @@ list:
 build-gui features='': create-build-output-dir
     just gui::build release '{{ features }}'
     cp target/release/openscq30-gui '{{ build-output-dir }}/'
+
+[doc("Run a fully optimized release build of the Qt GUI")]
+[group("build")]
+build-gui-qt features='': create-build-output-dir
+    just gui-qt::build release '{{ features }}'
+    cp target/release/openscq30-gui-qt '{{ build-output-dir }}/'
 
 [doc("Run a release build with excessively slow optimizations disabled")]
 [group("build")]

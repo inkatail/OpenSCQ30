@@ -1,0 +1,29 @@
+set dotenv-load := true
+
+# Qt is located via QMAKE (qmake6 on most distros).
+run:
+    QMAKE=qmake6 cargo run
+
+[arg("level", pattern="trace|debug|info|warn|error|off")]
+run-filtered-logs level='debug':
+    RUST_LOG=none,openscq30_gui_qt={{level}} cargo run
+
+[arg("profile", pattern="dev|release|release-fast")]
+build profile features='':
+    QMAKE=qmake6 cargo build --profile '{{profile}}' --features '{{features}}'
+
+test:
+    QMAKE=qmake6 cargo test
+
+install path:
+    ./scripts/install.sh "{{path}}"
+
+uninstall path:
+    ./scripts/uninstall.sh "{{path}}"
+
+alias fmt := format
+format:
+    cargo fmt
+
+format-check:
+    cargo fmt --check

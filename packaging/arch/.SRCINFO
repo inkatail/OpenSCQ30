@@ -1,0 +1,24 @@
+pkgbase = openscq30-gui-qt-git
+	pkgdesc = Control settings for Soundcore headphones and earbuds (Qt UI)
+	pkgver = 2.12.0.r0.g0000000
+	pkgrel = 1
+	url = https://github.com/inkatail/OpenSCQ30
+	arch = x86_64
+	license = GPL-3.0-or-later
+	makedepends = cargo
+	makedepends = git
+	makedepends = qt6-base
+	makedepends = qt6-declarative
+	makedepends = rust
+	depends = gcc-libs
+	depends = glibc
+	depends = hicolor-icon-theme
+	depends = qt6-base
+	depends = qt6-declarative
+	optdepends = qqc2-desktop-style: native KDE Plasma style
+	provides = openscq30-gui-qt
+	conflicts = openscq30-gui-qt
+	source = git+https://github.com/inkatail/OpenSCQ30.git
+	sha256sums = SKIP
+
+pkgname = openscq30-gui-qt-git

@@ -6,6 +6,7 @@ members = [
     "android",
     "uniffi-bindgen",
     "gui",
+    "gui-qt",
     "i18n",
     "i18n-macros",
     "lib-has",

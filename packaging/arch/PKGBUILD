@@ -1,0 +1,45 @@
+# Maintainer: inkatail <https://github.com/inkatail>
+# Qt6/QML desktop UI for OpenSCQ30 (fork default branch). Tracks git master.
+
+pkgname=openscq30-gui-qt-git
+pkgver=2.12.0.r0.g0000000
+pkgrel=1
+pkgdesc='Control settings for Soundcore headphones and earbuds (Qt UI)'
+arch=('x86_64')
+url='https://github.com/inkatail/OpenSCQ30'
+license=('GPL-3.0-or-later')
+depends=('gcc-libs' 'glibc' 'hicolor-icon-theme' 'qt6-base' 'qt6-declarative')
+makedepends=('cargo' 'git' 'qt6-base' 'qt6-declarative' 'rust')
+optdepends=('qqc2-desktop-style: native KDE Plasma style')
+provides=('openscq30-gui-qt')
+conflicts=('openscq30-gui-qt')
+source=('git+https://github.com/inkatail/OpenSCQ30.git')
+sha256sums=('SKIP')
+
+pkgver() {
+    cd OpenSCQ30
+    printf '2.12.0.r%s.g%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd OpenSCQ30
+    export QMAKE=qmake6
+    cargo fetch --locked -p openscq30-gui-qt
+}
+
+build() {
+    cd OpenSCQ30
+    export QMAKE=qmake6
+    # Full LTO per workspace profile is very slow here; thin, still stripped.
+    export CARGO_PROFILE_RELEASE_LTO=false
+    cargo build --release --locked -p openscq30-gui-qt
+}
+
+package() {
+    cd OpenSCQ30
+    install -Dm755 target/release/openscq30-gui-qt -t "$pkgdir/usr/bin/"
+    install -Dm644 gui-qt/resources/com.oppzippy.OpenSCQ30.Qt.desktop -t "$pkgdir/usr/share/applications/"
+    install -Dm644 gui/resources/com.oppzippy.OpenSCQ30.svg \
+        "$pkgdir/usr/share/icons/hicolor/scalable/apps/com.oppzippy.OpenSCQ30.svg"
+    install -Dm644 LICENSE.txt -t "$pkgdir/usr/share/licenses/$pkgname/"
+}

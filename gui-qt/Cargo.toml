@@ -1,0 +1,39 @@
+[package]
+name = "openscq30-gui-qt"
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+edition = "2021"
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "openscq30-gui-qt"
+path = "src/main.rs"
+
+[dependencies]
+cxx = "1"
+cxx-qt = "0.7"
+cxx-qt-lib = { version = "0.7", features = ["full"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+openscq30-lib = { workspace = true }
+openscq30-i18n = { workspace = true }
+dirs = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+macaddr = { workspace = true }
+strum = { workspace = true }
+toml = { workspace = true }
+i18n-embed = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[build-dependencies]
+cxx-qt-build = { version = "0.7", features = ["link_qt_object_files"] }
+qt-build-utils = "0.6"
