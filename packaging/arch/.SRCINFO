@@ -20,6 +20,7 @@ pkgbase = openscq30-gui-qt-git
 	optdepends = qqc2-desktop-style: native KDE Plasma style
 	provides = openscq30-gui-qt
 	conflicts = openscq30-gui-qt
+	options = !lto
 	source = git+https://github.com/inkatail/OpenSCQ30.git
 	sha256sums = SKIP
 

@@ -8,6 +8,11 @@ pkgdesc='Control settings for Soundcore headphones and earbuds (Qt UI)'
 arch=('x86_64')
 url='https://github.com/inkatail/OpenSCQ30'
 license=('GPL-3.0-or-later')
+# Distro CFLAGS LTO (-flto=auto) makes GCC emit LTO bytecode for the
+# cxx-qt C++ shims, which rustc's archiver cannot index, breaking the
+# final link (undefined rust$cxxqtlib1$* symbols). Rust-side LTO stays
+# off via CARGO_PROFILE_RELEASE_LTO in build().
+options=('!lto')
 depends=('dbus' 'gcc-libs' 'glibc' 'hicolor-icon-theme' 'qt6-base' 'qt6-declarative' 'sqlite')
 makedepends=('cargo' 'git' 'qt6-base' 'qt6-declarative' 'rust')
 optdepends=('qqc2-desktop-style: native KDE Plasma style')
